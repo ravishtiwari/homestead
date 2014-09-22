@@ -1,5 +1,13 @@
-# Laravel Homestead
+# Laravel Homestead with Apache Ant 
+h3.Steps to Get started: 
+* Download install Vitualbox
+* Download and install Vagrant
+* Start terminal and goto Homestad folder and do:
+	- vagrant add laravel/homestead
+	- vagrant up 
+	- vagrant ssh
 
-The official Laravel local development environment.
-
-Official documentation [is located here](http://laravel.com/docs/homestead?version=4.2).
+#add following entries to your hosts file of host
+127.0.0.1  laravel.app
+127.0.0.1  moadmin.app
+127.0.0.1  phpadminer.app
