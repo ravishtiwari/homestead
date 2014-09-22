@@ -1,7 +1,7 @@
 ---
 ip: "192.168.10.10"
 memory: 2048
-cpus: 1
+cpus: 2
 
 authorize: ~/.ssh/id_rsa.pub
 
@@ -9,12 +9,18 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: ~/Code
+    - map: ~/Documents/Projects
       to: /home/vagrant/Code
 
 sites:
-    - map: homestead.app
+    - map: laravel.app
       to: /home/vagrant/Code/Laravel/public
+    #Uncomment this line if you want to use Facebook HipHop Virtual Machine   
+    #hhvm: true
+    - map: moadmin.app
+      to: /home/vagrant/Code/phpmoadmin
+    - map: phpadminer.app
+      to: /home/vagrant/Code/phpadminer    
 
 variables:
     - key: APP_ENV
