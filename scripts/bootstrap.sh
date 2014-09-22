@@ -10,9 +10,7 @@ TIMEZONE="Europe/London" # can be altered to your specific timezone, see http://
 #----- end of configurable variables -----#
 
 apt-get update
-sleep 2
-
-##### PROVISION CHECK ######
+## sleep 2
 
 # The provision check is intended to not run the full provision script when a box has already been provisioned.
 echo "......................[vagrant provisioning]......................"
@@ -35,7 +33,7 @@ sudo apt-get update
 echo "......................[vagrant provisioning]......................"
 
 echo "Installing Java..."
-sleep 2
+# sleep 2
 sudo apt-get -y install curl
 sudo apt-get -y install python-software-properties # adds add-apt-repository
 
@@ -55,29 +53,29 @@ command -v unzip >>/dev/null  2>&1 || {
 	echo "Zip command does not exists"
 	echo "Installing zip/Unzip"
 	echo "... ... "
-	sleep 2
+	# sleep 2
 	sudo apt-get -y install zip unzip
 }
 #sudo apt-get -y install unzip
 
 
 echo "Checking Composer"
-sleep 3
+# sleep 3
 command -v composer >>/dev/null  2>&1 || { 
 	echo "Installing Composer"
 	echo "... ... "
 	echo "... ... ..."
 	curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer
 	ln -s /bin/composer /usr/local/bin/composer
-	sleep 2
+	# sleep 2
 }
 
 
 echo "Checking Ant"
-sleep 1
+# sleep 1
 
 echo "Installing apache ant"
-sleep 2
+# sleep 2
 echo "... ... "
 echo "... ... ..."
 
@@ -87,30 +85,30 @@ echo "Checking NodeJS"
 command -v node >>/dev/null  2>&1 || {
 	echo "Node.js does not exists"
 	echo "Installing Node.js "
-	sleep 2
+	# sleep 2
 	echo "... ... "
 	echo "... ... ..."
-	sleep 1
+	# sleep 1
 	apt-get install nodejs nodejs-dev -y
-	sleep 1
+	# sleep 1
 	echo "Installing npm"
 	echo "... ... "
 	echo "... ... ..."
 	apt-get install npm -y
 	echo "... ... "
 	echo "... ... ..."
-	sleep 1
+	# sleep 1
 	npm install bower -g -y
 	npm install gulp -y
 	echo "... ... "
 	echo "... ... ..."
 	npm install -g grunt-cli grunt -y
-	sleep 2
+	# sleep 2
 
 }
 
 echo "Checking MongoDB"
-sleep 5
+# sleep 5
 command -v mongo >>/dev/null  2>&1 || { 
 	echo "MongoDB does not exists"
 	echo "Installing Mongo DB"
@@ -119,7 +117,7 @@ command -v mongo >>/dev/null  2>&1 || {
 	apt-get install mongodb mongodb-server mongodb-clients php5-dev -y
 	echo "restart mongodb "
 	echo "... ... "
-	sleep 2
+	# sleep 2
 	echo "... ... ..."
 	service mongodb restart
 	echo "Installing php5-mongo"
@@ -127,26 +125,26 @@ command -v mongo >>/dev/null  2>&1 || {
 	echo "... ... "
 	echo "... ... ..."
 }
-sleep 10
+# sleep 10
 
 echo "Checking Pear"
 command -v pecl >>/dev/null  2>&1 || { 
 	echo "PHP Pear does not exists"
 	echo "Installing Pear"
 	echo "... ... "
-	sleep 2
+	# sleep 2
 	apt-get install php-pear -y
 }
 
 echo "Installing php5-xdebug"
 pecl install xdebug 
-sleep 2
+# sleep 2
 echo "extension=xdebug.so" >/etc/php5/mods-available/xdeug.ini
 ln -s /etc/php5/mods-available/xdeug.ini /etc/php5/fpm/conf.d/xdeug.ini
 
 echo "Installing Mongo Driver"
 echo "... ... "
-sleep 2
+# sleep 2
 pecl install mongo 
 echo "extension=mongo.so" >/etc/php5/mods-available/mongo.ini
 ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/mongo.ini
@@ -156,7 +154,7 @@ service php5-fpm restart
 echo "Installing rabbitmq "
 echo "... ... "
 echo "... ... ..."
-sleep 5
+# sleep 5
 echo "deb http://www.rabbitmq.com/debian/ testing main" >> /etc/apt/sources.list 
 
 cd /tmp
@@ -164,7 +162,7 @@ wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 apt-key add rabbitmq-signing-key-public.asc
 echo "... ... "
 echo "... ... ..."
-sleep 1
+# sleep 1
 echo "... ... ..."
 echo "... ... "
 apt-get update
@@ -175,7 +173,7 @@ apt-get install rabbitmq-server -y
 #	echo "Zip command does not exists"
 #	echo "Installing zip/Unzip"
 #	echo "... ... "
-#	sleep 2
+#	# sleep 2
 #	apt-get install zip unzip -y
 #}
 
@@ -205,10 +203,8 @@ fi
 #http://downloads.sourceforge.net/adminer/adminer-4.1.0.php
 
 
-##### CLEAN UP #####
-sudo dpkg --configure -a # when upgrade or install doesn't run well (e.g. loss of connection) this may resolve quite a few issues
-apt-get autoremove -y # remove obsolete packages
-##### PROVISION CHECK #####
+sudo dpkg --configure -a 
+apt-get autoremove -y
 # Create .provision_check for the script to check on during a next vargant up.
 echo "......................[vagrant provisioning]......................"
 echo "Creating .provision_check file..."
