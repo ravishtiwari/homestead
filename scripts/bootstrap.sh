@@ -218,13 +218,7 @@ echo "..."
 echo "..."
 echo "Forwarded ports from host to guest are : "
 
-printf 
-	"
-	SSH: 2222 -> Forwards To 22 \n
-	HTTP: 8000 -> Forwards To 80\n
-	MySQL: 33060 -> Forwards To 3306\n
-	Postgres: 54320 -> Forwards To 5432\n
-	Mongo 27017 -> Forwards To 27018\n\n\n
-	"
+printf "SSH: 2222 -> Forwards To 22 \nHTTP: 8000 -> Forwards To 80\n"
+printf "MySQL: 33060 -> Forwards To 3306\nPostgres: 54320 -> Forwards To 5432\nMongo 27017 -> Forwards To 27018\n\n\n"
 
 echo "Happy Coding :)"
