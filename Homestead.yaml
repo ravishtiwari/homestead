@@ -2,20 +2,23 @@
 ip: "192.168.10.10"
 memory: 2048
 cpus: 2
-
 authorize: ~/.ssh/id_rsa.pub
-
 keys:
     - ~/.ssh/id_rsa
-
 folders:
-    - map: ~/Documents/Projects
-      to: /home/vagrant/Code
+    #- map: /howdy-travisci
+    #  to: /home/vagrant/Code/Laravel
+    - map: ~/Documents/Projects/inviteapp
+      to: /home/vagrant/Code/inviteapp
+#      map: ../
+#      to: /home/vagrant/Code/1
 
 sites:
-    - map: laravel.app
-      to: /home/vagrant/Code/Laravel/public
-    #Uncomment this line if you want to use Facebook HipHop Virtual Machine   
+  #  - map: laravel.app
+  #    to: /home/vagrant/Code/Laravel/public
+    - map: invite.app
+      to: /home/vagrant/Code/inviteapp/public  
+    #Uncomment this line if you want to use HipHop Virtual Machine   
     #hhvm: true
     - map: moadmin.app
       to: /home/vagrant/Code/phpmoadmin

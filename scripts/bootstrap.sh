@@ -24,13 +24,12 @@ then
   exit
 fi
 
-echo "[vagrant provisioning] Updating mirrors in sources.list"
+echo "Updating mirrors in sources.list"
 
 # prepend "mirror" entries to sources.list to let apt-get use the most performant mirror
 sudo sed -i -e '1ideb mirror://mirrors.ubuntu.com/mirrors.txt precise main restricted universe multiverse\ndeb mirror://mirrors.ubuntu.com/mirrors.txt precise-updates main restricted universe multiverse\ndeb mirror://mirrors.ubuntu.com/mirrors.txt precise-backports main restricted universe multiverse\ndeb mirror://mirrors.ubuntu.com/mirrors.txt precise-security main restricted universe multiverse\n' /etc/apt/sources.list
 sudo apt-get update
 
-echo "......................[vagrant provisioning]......................"
 
 echo "Installing Java..."
 # sleep 2
@@ -70,10 +69,6 @@ command -v composer >>/dev/null  2>&1 || {
 	# sleep 2
 }
 
-
-echo "Checking Ant"
-# sleep 1
-
 echo "Installing apache ant"
 # sleep 2
 echo "... ... "
@@ -104,7 +99,6 @@ command -v node >>/dev/null  2>&1 || {
 	echo "... ... ..."
 	npm install -g grunt-cli grunt -y
 	# sleep 2
-
 }
 
 echo "Checking MongoDB"
@@ -169,13 +163,12 @@ apt-get update
 apt-get install rabbitmq-server -y
 
 
-#command -v unzip >>/dev/null  2>&1 || { 
-#	echo "Zip command does not exists"
-#	echo "Installing zip/Unzip"
-#	echo "... ... "
-#	# sleep 2
-#	apt-get install zip unzip -y
-#}
+command -v unzip >>/dev/null  2>&1 || { 
+	echo "Installing zip/Unzip"
+	echo "... ... "
+	sleep 2
+	apt-get install zip unzip -y
+}
 
 echo "Checking PHPMoadmin"
 if [ ! -e "/home/vagrant/Code/phpmoadmin/index.php" ]
@@ -201,14 +194,11 @@ then
 	mv adminer-4.1.0.php index.php
 fi
 #http://downloads.sourceforge.net/adminer/adminer-4.1.0.php
-
-
 sudo dpkg --configure -a 
 apt-get autoremove -y
-# Create .provision_check for the script to check on during a next vargant up.
+
 echo "......................[vagrant provisioning]......................"
 echo "Creating .provision_check file..."
-touch .provision_check
 echo "......................[vagrant provisioning]......................"
 echo " Development Boxes configured, now add following entries to your hosts file of host"
 echo " 127.0.0.1  laravel.app"
